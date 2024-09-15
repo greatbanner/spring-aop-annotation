@@ -9,12 +9,9 @@ import com.example.aop.demo.aop.EventMapper;
 
 @Service
 public class AuditableGreeterWithAOP {
-
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
     
-    @AuditableInt(eventMapper = EventMapper.class)
+    @AuditableInt(eventMapper = EventMapper.class, onErrorMapper = EventMapper.class)
     public String greetAndAudit(String userToGreet) {
-        logger.info("greeting user");
         String message = "Welcome " + userToGreet;
         return message;
     }

@@ -17,6 +17,9 @@ public class HelloController {
     @Autowired
     private AuditableGreeterWithAOP auditableGreeterWithAOP;
 
+    @Autowired
+    private AuditableGreeterWithFuntional auditableGreeterWithFuntional;
+
     @GetMapping("aop")
     public String greetUserWithAop(@RequestParam(name = "user") String user) {
         return auditableGreeterWithAOP.greetAndAudit(user);
@@ -27,4 +30,8 @@ public class HelloController {
         return auditableGreeter.greetAndAudit(user);
     }
     
+    @GetMapping("fun")
+    public String greetUserAsFun(@RequestParam(name = "user") String user) {
+        return auditableGreeterWithFuntional.greetAndAudit(user);
+    }
 }

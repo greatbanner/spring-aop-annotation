@@ -8,5 +8,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)
 public @interface AuditableInt {
-    Class eventMapper();
+    Class<?> eventMapper() default Mapper.class;
+    Class<?> onErrorMapper() default Mapper.class;
 }

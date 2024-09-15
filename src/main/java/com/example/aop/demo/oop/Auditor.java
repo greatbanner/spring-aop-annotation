@@ -12,9 +12,18 @@ public class Auditor<T> {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
-    public T processAndAudit(Supplier<T> toAudit, Function<T, Event> mapper){
-        var result = toAudit.get();
-        var eventToAudit = mapper.apply(result);
+    private Supplier<T> methodToAudit;
+    private Function<T, Event> responseToMapper;
+
+
+    public Auditor(Supplier<T> methodToAudit, Function<T, Event> responseToMapper) {
+        this.methodToAudit = methodToAudit;
+        this.responseToMapper = responseToMapper;
+    }
+
+    public T processAndAudit(){
+        var result = methodToAudit.get();
+        var eventToAudit = responseToMapper.apply(result);
         auditEvent(eventToAudit);
         return result;
     }

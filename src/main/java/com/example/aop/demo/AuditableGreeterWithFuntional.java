@@ -15,8 +15,8 @@ public class AuditableGreeterWithFuntional {
     private ResponseToEvent responseToEvent;
 
     public String greetAndAudit(String userToGreet) {
-       Auditor<String> adittor = new Auditor<>();
-       return adittor.processAndAudit( ()-> greet(userToGreet), response -> responseToEvent.map(response, userToGreet));
+       Auditor<String> audittor = new Auditor<>(()-> greet(userToGreet), response -> responseToEvent.map(response, userToGreet));
+       return audittor.processAndAudit( );
     }
 
     private String greet(String userToGreet){
